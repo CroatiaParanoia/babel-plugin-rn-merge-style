@@ -17,8 +17,8 @@ function findLastImportIndex(body: Types.Statement[]) {
   return _index;
 }
 
-function getMatchRule(enableMultipleClassName: boolean) {
-  if (enableMultipleClassName) {
+function getMatchRule(enableMultipleStyle: boolean) {
+  if (enableMultipleStyle) {
     return {
       styleMatchRule: /[sS]tyle$/,
     };
@@ -57,10 +57,10 @@ export default function (babel: { types: typeof Types; template: typeof Template
       },
       JSXOpeningElement({ node }, state) {
         const { file, opts = {} } = state;
-        const { enableMultipleClassName = false } = getPluginOpts(state);
+        const { enableMultipleStyle = false } = getPluginOpts(state);
         const attributes = node.attributes;
 
-        const { styleMatchRule } = getMatchRule(enableMultipleClassName);
+        const { styleMatchRule } = getMatchRule(enableMultipleStyle);
 
         attributes.forEach((attribute) => {
           if (!babelTypes.isJSXAttribute(attribute)) return;
@@ -77,8 +77,6 @@ export default function (babel: { types: typeof Types; template: typeof Template
 
           if (expressionType !== 'ObjectExpression') {
             needInjectMergeStyleTemplate = true;
-            // @ts-ignore
-            // console.log(expression.elements, 'value expression');
 
             attribute.value = babelTypes.jSXExpressionContainer(
               babelTypes.callExpression(babelTypes.identifier(MERGE_STYLE_NAME), [expression as any]),

@@ -16,10 +16,10 @@ function formatCode(sourceCode: string) {
 }
 
 function transformCode(source: string, debug = false, options: PluginOptions = {}) {
-  const { enableMultipleClassName = false } = options;
+  const { enableMultipleStyle = false } = options;
   const code = formatCode(
     transform(source, {
-      plugins: [[mergePlugin, { enableMultipleClassName }], syntaxJSX],
+      plugins: [[mergePlugin, { enableMultipleStyle }], syntaxJSX],
       configFile: false,
     })?.code ?? '',
   );
@@ -114,7 +114,7 @@ function App() {
 }
 `,
         true,
-        { enableMultipleClassName: true },
+        { enableMultipleStyle: true },
       ),
     ).toBe(
       formatCode(
@@ -186,7 +186,7 @@ function App() {
         }
 `,
         true,
-        { enableMultipleClassName: true },
+        { enableMultipleStyle: true },
       ),
     ).toBe(
       formatCode(
