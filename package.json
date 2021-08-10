@@ -4,7 +4,6 @@
   "description": "",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "browser": "umd/index.js",
   "scripts": {
     "test": "jest",
     "dev": "rollup -cw",

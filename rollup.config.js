@@ -12,11 +12,6 @@ export default {
       file: pkg.module,
       format: 'es'
     },
-    {
-      file: pkg.browser,
-      format: 'umd',
-      name: 'ModuleName'
-    }
   ],
   plugins: [
     resolve(),
